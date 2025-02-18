@@ -1,0 +1,40 @@
+# This is the configuration file to run the cellranger pipeline on the Weizmann cluster/ AWS EC2 / PC
+
+# Required:
+project_name: yoav_liver
+
+# Required:
+id: liver
+
+# Required: Choose your pipeline!
+pipeline: cellbender
+
+# Required: choose: 
+# For mrna-seq choose cellranger
+# For atac-seq choose cellranger-atac
+aligner_software_path: cellranger
+
+# Default: Designated to Wexac
+running_machine:  
+
+# Default: False
+aws_ec2: 
+                                                                                                                                                                                                                                              
+
+
+
+
+
+# Runtime parameters set to be nominal turnaround runtime
+# Required
+jobs_number: 5
+
+# Required
+cpus_number: 5
+
+# Required (in GB)
+total_memory_used: 70 
+
+# Required (only for wexac)
+queue: long
+
