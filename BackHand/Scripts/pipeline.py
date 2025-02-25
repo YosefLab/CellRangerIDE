@@ -1,13 +1,14 @@
 from _utils import * 
 import os
 import sys
+import shutil
 import subprocess
 import demultiplex as demultiplex
 import pandas as pd
 import numpy as np
-if sys.version.split()[0] >= '3.9':
-    import scanpy as sc
+import scanpy as sc
 import anndata as ad
+import requests
 import subprocess
 import cellbenderPipe as cb 
 
@@ -28,7 +29,6 @@ class pipeline:
             os.makedirs(CSV_PATH)
             os.makedirs(FASTQ_PATH)
             os.makedirs(CUSTOM_REF_PATH)
-            os.makedirs(CELLBENDER_PATH)
             os.makedirs(LOGS_PATH)
             os.makedirs(FASTQC_PATH)
             os.makedirs(H5_PATH)
@@ -53,7 +53,8 @@ class pipeline:
             self.running_machine        = "Wexac"
 
         self.aligner_software_path      = config['aligner_software_path']
-        
+        if self.aligner_software_path   == 'Default':
+            self.aligner_software_path  = DEFAULT_ALIGNER_PATH
 
         if self.pipeline                 == "mkfastq":
             self.BCL_path                = config_selected_pipeline['BCL_path']
@@ -63,17 +64,17 @@ class pipeline:
             # one day the rest of the options will be implemented as well
 
         elif self.pipeline                   == "count":
-            self.alignment_ref_genome_file     = config_selected_pipeline['alignment_ref_genome_file']
-            if self.alignment_ref_genome_file  == None:
-                self.alignment_ref_genome_file = gex_reference_path
-            self.fastq_path                  = config_selected_pipeline['fastq_path']
-            self.id                          = config_selected_pipeline['id']
-            
+            self.aligner_ref_genome_path     = config_selected_pipeline['alignment_ref_genome_file']
+            if self.aligner_ref_genome_path  == None:
+                self.aligner_ref_genome_path = gex_reference_path
+            self.fastq_path                  = config_selected_pipeline['BCL_path']
+            self.sample_name                 = config_selected_pipeline['sample_name']
+            # one day the rest of the options will be implemented as well
 
         elif self.pipeline                   == "multi":
             self.aligner_ref_genome_path     = config_selected_pipeline['alignment_ref_genome_file']
             self.create_bam                  = config_selected_pipeline['create_bam']
-            self.expected_cells              = config_selected_pipeline['expected_cell']
+            self.expected_cells               = config_selected_pipeline['expected_cell']
             self.include_introns             = config_selected_pipeline['include_introns']
             self.R1_gex_len                     = config_selected_pipeline['R1_gex_length']
             self.R2_gex_len                     = config_selected_pipeline['R2_gex_length']
@@ -344,7 +345,6 @@ f"wget --no-check-certificate {incpm_link[i]}SampleSheet.csv --output-document={
             self.priors                         = config_selected_pipeline['priors']
             if self.priors                      == 'Default':
                 self.priors                     = [0.01,0.8,0.19]
-            else:
                 self.priors                     = [self.priors for _ in range(len(self.sample_names))]
             self.hto_list_per_sample            = config_selected_pipeline['hto_list_per_sample']
             self.sample_id_to_expected_barcodes = {}
@@ -362,8 +362,6 @@ f"wget --no-check-certificate {incpm_link[i]}SampleSheet.csv --output-document={
             self.device = cb.check_cuda_availability()
             self.data_path = config_selected_pipeline['data_path']
             self.chosen_pipeline = config_selected_pipeline['chosen_pipeline']
-
-
         # Runtime parameters
 
         self.cpus_number                = config['cpus_number']
@@ -532,70 +530,36 @@ Optional:
         --nopreflight                                 Skip preflight checks
     -h, --help                                        Print help information
         '''
-        for i in range(len(self.fastq_path)):
-            with open(make_count_path, "w") as f:
-                f.write(
-                f"""#!/usr/bin/bash
 
-cp {OUTPUT_PATH}
+        with open(make_count_path, "w") as f:
+            if(len(self.fastq_path)!=1):
+                print("For the count pipeline, you should have one fastq directory!")
+                return # should be exit probably
+            f.write(
+            f"""#!/usr/bin/bash
 
-{self.aligner_software_path} count \
---id={self.id[i]} \
---fastqs={self.fastq_path[i]} \
---transcriptime={self.alignment_ref_genome_file} \
---maxjobs={MAX_JOBS} \
---localcores={CPUS_PER_TASK} \
---localmem={MEM_PER_TASK} &
-PID=$! 
-wait $PID
-mv {OUTPUT_PATH}{self.id} {H5_PATH}
+    #SBATCH --job-name={''}
+    #SBATCH --output={''}
+    #SBATCH --partition={''}
+    #SBATCH --mem={''}G
+    #SBATCH --cpus-per-task={''}
 
-                """
-                )
-            if self.running_machine == "Wexac":
-                with open(run_file_path, "w+") as g:
-                    g.write(
-                f"""
-#BSUB -J make_count_{i}
-#BSUB -q {self.queue}
-#BSUB -R rusage[mem={self.total_memory_used}G]
-#BSUB -R affinity[thread*{self.jobs_number}]
-#BSUB -R "span[hosts=1]"
-#BSUB -oo {count_log}
-#BSUB -eo {count_error_log} 
+    {self.aligner_software_path} count \
+    --id={self.id} \
+    --fastqs={self.fastq_folders_name[0]} \
+    --sample={self.sample_name} \
+    --transcriptime={self.aligner_ref_genome_path} \
+    --maxjobs={MAX_JOBS} \
+    --localcores={CPUS_PER_TASK} \
+    --localmem={MEM_PER_TASK}
 
-cd {OUTPUT_PATH}
-bash {make_multi_path}
+    mv {self.id} {H5_PATH}
+    mv {make_count_path} {H5_PATH}
 
-                """
-                    )
-                    
-            if self.running_machine == "Wexac":
-                with open(run_file_path, "w+") as g:
-                    g.write(
-                f"""
-#BSUB -J make_multi
-#BSUB -q {self.queue}
-#BSUB -R rusage[mem={self.total_memory_used}G]
-#BSUB -R affinity[thread*{self.jobs_number}]
-#BSUB -R "span[hosts=1]"
-#BSUB -oo {count_log}
-#BSUB -eo {count_error_log} 
+            """
+            )
 
-cd {OUTPUT_PATH}
-bash {make_count_path}
 
-                """
-                    )
-                subprocess.run(f"cat {run_file_path} | bsub ", shell=True)
-            
-            else:
-                subprocess.run(f"bash {make_count_path}",
-                    shell=True,
-                    stdout=count_log,  
-                    stderr=count_error_log
-                )
-        return True
 
     def multiplex(self):
 
@@ -642,7 +606,7 @@ OPTIONS:
             self.multi_csv = self.multi_csv = pd.concat([self.multi_csv, pd.DataFrame([["create-bam", "true", None, None]], columns=col)], ignore_index=True)
         else:
             self.multi_csv = self.multi_csv = pd.concat([self.multi_csv, pd.DataFrame([["create-bam", "false", None, None]], columns=col)], ignore_index=True)
-        if self.R1_gex_len is not 'Default' and self.R2_gex_len is not 'Default':
+        if ((self.R1_gex_len != 'Default' and self.R2_gex_len != 'Default') or (self.R1_gex_len is not None and self.R2_gex_len is not None)):
             self.multi_csv = self.multi_csv = pd.concat([self.multi_csv, pd.DataFrame([["r1-length", self.R1_gex_len, None, None]], columns=col)], ignore_index=True)
             self.multi_csv = self.multi_csv = pd.concat([self.multi_csv, pd.DataFrame([["r2-length", self.R2_gex_len, None, None]], columns=col)], ignore_index=True)
         if self.expected_cells is not None:
@@ -694,7 +658,7 @@ OPTIONS:
             f.write(
             f"""#!/usr/bin/bash
 
-cp {OUTPUT_PATH}
+cd {OUTPUT_PATH}
 {self.aligner_software_path} multi \
 --id={self.id} \
 --csv={MULTI_CSV_PATH} \
@@ -703,7 +667,7 @@ cp {OUTPUT_PATH}
 --localmem={self.total_memory_used} &
 PID=$! 
 wait $PID
-mv {BEFORE_DEMULTI_H5ADS_PATH} 
+mv {OUTPUT_PATH}{self.id} {BEFORE_DEMULTI_H5ADS_PATH} 
 
             """ 
             )
@@ -879,15 +843,17 @@ OPTIONS:
         if self.data_path.endswith('/'):
             self.data_path = self.data_path[:-1]
         base_directory = os.path.basename(self.data_path)
-        data_dir = os.path.dirname(self.data_path)
-        save_dir = CELLBENDER_PATH
-        result = cb.run_cellbender_shell(base_directory, data_dir, self.cellbender_shell, self.chosen_pipeline)
+        self.data_path = os.path.dirname(self.data_path)
+        save_dir = os.path.join(base_directory, "cellbender")
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+        result = cb.run_cellbender_shell(base_directory, self.data_path, self.cellbender_shell, self.chosen_pipeline)
         if not result:
             print("Error encountered, stopping further execution.")
             return
         else:
             try:
-                cb.save_files_locally(base_directory, data_dir, save_dir)
+                cb.save_files_locally(base_directory, self.data_path, save_dir)
             except Exception as e:
                 print(f"Failed to save files for donor {base_directory}: {e}")
         return

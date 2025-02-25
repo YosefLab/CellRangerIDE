@@ -62,7 +62,7 @@ multiplexing_method: feature_barcode
 # Default: only if you are using the feature_barcode as your multiplexing_method 
 feature_reference_csv: Default 
 
-# Required: choose from the next list respectively to the fastq order: gene expression, Antibody Capture.
+# Required: choose from the next list respectively to the fastq order: Gene expression, Antibody Capture.
 feature_types:
   - 
   - 
