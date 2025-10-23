@@ -6,10 +6,20 @@ In this section you find explanation about the script that runs CellRanger pipel
 such as: converting BCL to fastqs files, alignment with\without multiple samples,
 various options inside the pipeline like: include introns or not in the alignment, read 3’ or 5’ and so on.
 
-**Location:** Currently the CellRangerIDE is located in the next GitHub URL:
+**Location:**
+
+Currently the CellRangerIDE is located in the next GitHub URL:
 https://github.com/yoavnahum21/CellRangerIDE.git. 
 
 you can find the Implementation code in the CellRangerIDE\Backhand\Scripts
+
+**Inititiallization** 
+
+    ```bash
+     BIN_PATH=$dirname$(which python))
+     cp ./CellRangerIDE/BackHand/Scripts/main.py $BINPATH/yosefranger
+    
+    ```
 
 **Instructions:** 
 
