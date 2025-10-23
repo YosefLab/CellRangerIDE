@@ -18,7 +18,6 @@ you can find the Implementation code in the CellRangerIDE\Backhand\Scripts
     ```bash
      BIN_PATH=$dirname$(which python))
      cp ./CellRangerIDE/BackHand/Scripts/main.py $BINPATH/yosefranger
-    
     ```
 
 **Instructions:** 
