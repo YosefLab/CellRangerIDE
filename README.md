@@ -15,15 +15,11 @@ you can find the Implementation code in the CellRangerIDE\Backhand\Scripts
 
 **Inititiallization** 
 
-    ```bash
-     BIN_PATH=$dirname$(which python))
-     cp ./CellRangerIDE/BackHand/Scripts/main.py $BINPATH/yosefranger
-    ```
-    
-    ```bash
-    ml CellRanger/9.0.0
-    ml CellRanger-ATAC/2.0.0
-    ```
+```bash
+ BIN_PATH=$dirname$(which python))
+ cp ./CellRangerIDE/BackHand/Scripts/main.py $BINPATH/yosefranger
+```
+
     
 **Instructions:** 
 
