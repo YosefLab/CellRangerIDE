@@ -16,7 +16,7 @@ you can find the Implementation code in the CellRangerIDE\Backhand\Scripts
 **Inititiallization** 
 
 ```bash
- BIN_PATH=$dirname$(which python))
+ BIN_PATH=$(dirname$(which python))
  chmod +x ./CellRangerIDE/BackHand/Scripts/main.py
  cp ./CellRangerIDE/BackHand/Scripts/main.py $BINPATH/yosefranger
 ```
