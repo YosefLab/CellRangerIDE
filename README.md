@@ -40,8 +40,6 @@ conda activate cellranger
 
 ```bash
 #!/bin/bash
-conda create -n cellranger python=3.10
-conda activate cellranger
 
 cd /opt
 wget -O cellranger-9.0.1.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-9.0.1.tar.gz?Expires=1739846992&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=lWj4nhoNebGYpV7bZzkYzxxmnhdlFD0zuLKtbLQsqPevb5VRscVDDsEdlnXdjnavCB6vyQMJ8DzgH9CHZqFIWwIfJz8jL4iPDGXXIZq4zqW1LG46hR18xergOgDrLaysRxzUZiFI2BOimjDtARViyyxZRSeVEsN3oILMLpWRukOPRt3czKfSbffpRq4Nw-QSlsTQQovruwQ5x27AgZ7ENApYSOgGKF5GF~hbOJYVbTchDUHNvyHChwmLPgENTefM3ZeGS1-Vs0X2XUL~pbIDeVdVUvLrwj~McjPzZuvXq-XB26qbD3jWNQrhmEG31OUVUfGvsbC2xdkur9EJwTCssA__"
@@ -54,7 +52,7 @@ export PATH=/opt/cellranger-atac-2.1.0:$PATH
 
 ```
 
-Instead of downloading cellranger softwares to your environment and only if you use wexac you can use:
+Instead of downloading cellranger softwares to your environment and only if you use wexac you can run:
 
 ```bash
 
