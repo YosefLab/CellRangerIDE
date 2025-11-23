@@ -1,0 +1,33 @@
+# This is the configuration file to run the cellranger pipeline on the Weizmann cluster/ AWS S3
+
+# Required:
+project_name: 
+
+# Required:
+id:
+
+# Required: Choose your pipeline!
+pipeline: multi
+
+# Default: /apps/easybd/easybuild/amd/software/CellRanger/9.0.0/bin/cellranger
+aligner_software_path: Default
+
+# Default: Designated to Wexac
+running_machine: Default
+                                                                                                                                                                                                                                              
+
+
+
+# Runtime parameters set to be nominal runtime on wexac
+# Required
+jobs_number: 5
+
+# Required
+cpus_number: 1
+
+# Required (in GB)
+total_memory_used: 70 
+
+# Required (only for wexac)
+queue: long
+

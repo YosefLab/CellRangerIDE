@@ -1,0 +1,122 @@
+# This is the configuration file to run the cellranger pipeline which creates annotated data files for multiple samples!
+
+# Default: refdata-gex-mm10-2020-Apwd
+alignment_ref_genome_file: Default
+
+ # Optional
+ # Default: refdata-cellranger-vdj-GRCh38-alts-ensembl-7.1.0
+alignment_ref_vdj_file: Default
+
+############# Option 1 ############
+# Required: 
+INCPM_link: 
+  - #Add the incpm link to the fastq files here 
+  - #Add the incpm link to the fastq files here
+
+
+############# Option 2 ############
+# Required:
+fastq_path: 
+  - #Add the path to the fastq files here 
+  - #Add the path to the fastq files here
+
+# Required: true or false
+create_bam: true
+
+# Optional: true or false
+include_introns: true 
+
+# Optional: int
+expected_cell:
+
+# Default: R1->28 Reads, R2->90 Reads
+r1_gex_length: Default
+r2_gex_length: Default
+
+# Default: R1->28 Reads, R2->90 Reads
+r1_vdj_length: Default
+r2_vdj_length: Default
+
+# Required: usually named after the prefix in the fastqs files
+sample_name: 
+  -
+  -
+
+# Required: please add the prefix of the fastq files respectevly to the fastq_path order
+fastq_folders_name:
+  - 
+  - 
+
+# Default: any
+lanes_used: 
+  - 
+  - 
+
+# Optional, options: 'feature_barcode' or 'cmo_barcode' (for now...)
+multiplexing_method:
+
+################ Feature Barcode Section ################
+
+# Default: only if you are using the feature_barcode as your multiplexing_method 
+feature_reference_csv: Default 
+
+# Required: choose from the next list respectively to the fastq order: Gene expression, Antibody Capture.
+feature_types:
+  - 
+  - 
+
+# Required: (if feature_barcode was not given)
+hto_id:
+  -  #Add hashing ID 
+  -  #Add hashing ID 
+
+# Default: hto_names = hto_id 
+hto_names:
+  - 
+  - 
+
+
+# Default: 'R2' 
+hto_read:
+  - Default
+  - 
+
+# Default: '5PNNNNNNNNNN(BC)' 
+hto_pattern:
+  - Default
+  -
+
+
+# Required (if feature_reference_csv wasn't given)
+hto_sequence:
+  - 
+  - 
+
+# Default: Antibody Capture 
+HTO_feature_type:
+  - Default
+  -
+
+
+############# CMO Section #################
+
+# Optional: 
+cmo_barcode_csv:  
+
+
+# Required (if cmo_barcode_csv wasn't given)
+sample_id_cmo:
+  - 
+  - 
+  -
+  - 
+
+# Required (if cmo_barcode_csv wasn't given)
+cmo_id:
+  - 
+  - 
+  - 
+  - 
+
+##### Demultiplexing section #####
+##### End of Demultiplexing section ####
