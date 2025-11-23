@@ -62,4 +62,59 @@ ml CellRanger-ATAC/2.0.0
 
 ```
 
-## Example notebook
+## Running explantation
+
+For running cellrangeride there are 2 main options:
+1) specify arguments according to the next template:
+```bash
+python CellRangerIDE/BackHand/Scripts/main.py \
+--cellrangeride-path path/to/CellRangerIDE \
+--pipeline \
+--project-name \
+--id \
+--aligner-software-path \
+--reference-genome \
+--incpm-link \
+--fastq-folder-path \
+--fastq-folders-names \
+--sample-names \
+--multiplexing-method \
+--feature-reference-csv \
+--feature-types \
+--hto-ids \
+--hto-names \
+--hto-reads \
+--hto-pattern \
+--hto-sequence \
+--hto-feature-type \
+--sample-id-cmo \
+--cmo-barcode-csv \
+--cmo-id \
+--probe-set-path \
+--probe-barcode-csv \
+--probe-description \
+--include-introns \
+--create-bam \
+--expected_cells \
+--R1-length \
+--R2-length \
+--R1-vdj-length \
+--R2-vdj-length \
+--cellbender-path \
+--chosen-pipeline \ 
+--demultiplex-method \
+--priors-probabilities \
+--adata-path \
+--running-machine \
+--num-of-jobs \ 
+--memory-size \
+--cpu-cores \
+--queue-name
+```
+
+2) In case you are not using part of those paramters they will be read by the relevant .yaml file in the const_files folder, This is another unpopular way to run the software and it will be used if part of the sections will remain empty or won't be used at all.
+If you still wish to modify these config file so at first you have to modify the config_general.yaml file and according to the pipeline you chose you have to fill the extra compatible config file.
+
+
+
+## Example run tutorial
