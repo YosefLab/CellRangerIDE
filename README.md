@@ -43,9 +43,10 @@ Here you can find general software for handling several methods:
 4) Support different types of expirements: rna-seq, atac-seq, cite-seq.
 5) Support different types of samples: gex, vdj, antibody, flex.
 
-#!/bin/bash
-cd /opt
-wget -O cellranger-9.0.1.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-9.0.1.tar.gz?Expires=1739846992&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=lWj4nhoNebGYpV7bZzkYzxxmnhdlFD0zuLKtbLQsqPevb5VRscVDDsEdlnXdjnavCB6vyQMJ8DzgH9CHZqFIWwIfJz8jL4iPDGXXIZq4zqW1LG46hR18xergOgDrLaysRxzUZiFI2BOimjDtARViyyxZRSeVEsN3oILMLpWRukOPRt3czKfSbffpRq4Nw-QSlsTQQovruwQ5x27AgZ7ENApYSOgGKF5GF~hbOJYVbTchDUHNvyHChwmLPgENTefM3ZeGS1-Vs0X2XUL~pbIDeVdVUvLrwj~McjPzZuvXq-XB26qbD3jWNQrhmEG31OUVUfGvsbC2xdkur9EJwTCssA__"
-tar -xzvf cellranger-9.0.1.tar.gz
-export PATH=/opt/cellranger-9.0.1:$PATH
+```bash
+conda create -n yourenv python=3.11
+conda activate yourenv
+pip install popv
+```
 
+## Example notebook
