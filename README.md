@@ -12,6 +12,32 @@ Here you can find general software for handling several methods:
 4) Support different types of expirements: rna-seq, atac-seq, cite-seq.
 5) Support different types of samples: gex, vdj, antibody, flex.
 
+## Installation
+
+First clone the git repo to your local computer
+
+```bash
+git clone https://github.com/YosefLab/CellRangerIDE
+```
+
+Due to contradictions between different types of environments we separate between cellbender and cellranger.
+Therefore, if you only use cellbender please run:
+
+```bash
+
+conda env create -f cbenv.yaml
+conda activate cellbender
+
+```
+In case you are using the rest of the API use the next environment
+
+```bash
+
+conda env create -f crenv.yaml
+conda activate cellranger
+
+```
+
 ```bash
 #!/bin/bash
 conda create -n cellranger python=3.10
@@ -25,6 +51,15 @@ export PATH=/opt/cellranger-9.0.1:$PATH
 wget -O cellranger-atac-2.1.0.tar.gz "https://cf.10xgenomics.com/releases/cell-atac/cellranger-atac-2.1.0.tar.gz?Expires=1739846838&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=e91w5zq4U~sU4G3ibOj1fvO5HW19FrwFMs8WpsresMLUy~IoBbI2FfZbB3QsC1UvrXZjqZ2f4WEkLz36Ww7nfdI37-AkOnpaVZVt3gjwjnoUPfAbLdM3p1S37AgEtGJ00TOS4xzP3l1rxfV-9aGnIlGCVGojtQfT20L3j0mydvUVPmhvs2HXqzdbtgDcUeFU-d8YBt7GvcFrSaM6d4veWXgMKeX1K8fn7s9AlsvBfKeRAKTZu6UPK8w4DTbCpB9--nmTDNyKJjRH9I6AhIXp0NmDDJ81wuhVDQ5f6x0o1q0yX1UWnv8oWbvF5bAtUgLqF68E9v8L-2cANe1pgpjKCA__"
 tar -xzvf cellranger-atac-2.1.0.tar.gz
 export PATH=/opt/cellranger-atac-2.1.0:$PATH
+
+```
+
+Instead of downloading cellranger softwares to your environment and only if you use wexac you can use:
+
+```bash
+
+ml CellRanger/9.0.0
+ml CellRanger-ATAC/2.0.0
 
 ```
 
