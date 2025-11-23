@@ -67,6 +67,7 @@ ml CellRanger-ATAC/2.0.0
 For running cellrangeride there are 2 main options:
 1) specify arguments according to the next template:
 ```bash
+
 python CellRangerIDE/BackHand/Scripts/main.py \
 --cellrangeride-path path/to/CellRangerIDE \
 --pipeline \
@@ -110,11 +111,15 @@ python CellRangerIDE/BackHand/Scripts/main.py \
 --memory-size \
 --cpu-cores \
 --queue-name
+
 ```
-
-2) In case you are not using part of those paramters they will be read by the relevant .yaml file in the const_files folder, This is another unpopular way to run the software and it will be used if part of the sections will remain empty or won't be used at all.
-If you still wish to modify these config file so at first you have to modify the config_general.yaml file and according to the pipeline you chose you have to fill the extra compatible config file.
-
-
+Of course not all of the parameters are needed to be set it depends of the pipeline you are using and also part of these arguments have default parameters.
+Therefore, you can check the cellranger_arguments.xlsx file to understand what is necessary and isn't.
 
 ## Example run tutorial
+
+2) In case you are not using part of those paramters they will be read by the relevant .yaml file in the const_files folder, This is another unpopular way to run the software and it will be used if part of the sections will remain empty or won't be used at all.
+If you still wish to modify these config files so at first you have to modify the config_general.yaml file and according to the pipeline you chose you have to fill the extra compatible config file.
+
+## Example config file setup
+
