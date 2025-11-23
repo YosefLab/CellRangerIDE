@@ -38,6 +38,7 @@ conda activate cellranger
 
 ```
 
+For downloading cellranger software to your local computer please run the next code:
 ```bash
 #!/bin/bash
 
