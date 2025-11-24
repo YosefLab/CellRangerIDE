@@ -53,6 +53,7 @@ export PATH=/opt/cellranger-atac-2.1.0:$PATH
 
 ```
 cellranger can be downloaded from the next link as well: https://www.10xgenomics.com/support/software/cell-ranger/downloads#download-links
+
 cellranger-atac can be downloaded from the next link as well: https://www.10xgenomics.com/support/software/cell-ranger-atac/downloads#download-links
 
 Instead of downloading cellranger softwares to your environment and only if you use wexac you can run:
