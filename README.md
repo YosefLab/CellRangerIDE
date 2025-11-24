@@ -43,15 +43,17 @@ For downloading cellranger software to your local computer please run the next c
 #!/bin/bash
 
 cd /opt
-wget -O cellranger-9.0.1.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-9.0.1.tar.gz?Expires=1739846992&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=lWj4nhoNebGYpV7bZzkYzxxmnhdlFD0zuLKtbLQsqPevb5VRscVDDsEdlnXdjnavCB6vyQMJ8DzgH9CHZqFIWwIfJz8jL4iPDGXXIZq4zqW1LG46hR18xergOgDrLaysRxzUZiFI2BOimjDtARViyyxZRSeVEsN3oILMLpWRukOPRt3czKfSbffpRq4Nw-QSlsTQQovruwQ5x27AgZ7ENApYSOgGKF5GF~hbOJYVbTchDUHNvyHChwmLPgENTefM3ZeGS1-Vs0X2XUL~pbIDeVdVUvLrwj~McjPzZuvXq-XB26qbD3jWNQrhmEG31OUVUfGvsbC2xdkur9EJwTCssA__"
+wget -O cellranger-10.0.0.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-10.0.0.tar.gz?Expires=1764019025&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=jN-EZAjhSuFQdfmuSfBnB-8O9RRs1bKDhUVhVN3bN9V66g~qIrU4lP2VPL8jDx13Q4EMhRRzcA9GrMVziYNOAJ7Us7lV4EAxMX4R3Hpa7A25rGa3-X7bgbWGd6xtZ~6IKjdy1wbW4vYCtZ6BJw1ObHwjElg0FbasLV79kwVAVR8l6SQsWPGZHsl5Rxq22uVvOZMhqfGrkucTt1iFAiyGxXhpORaMeT1pz4J~SgBwZmZSNXjUROtlFef-f1xbnlbRfpGpggf~Byp93gXxrw95Wxgv3KR6UsN9r-HlgJPus~8GTrxF88sHG2ZijB90OLWpWNDbxDA50p6X618SO0Hm9g__"
 tar -xzvf cellranger-9.0.1.tar.gz
 export PATH=/opt/cellranger-9.0.1:$PATH
 
-wget -O cellranger-atac-2.1.0.tar.gz "https://cf.10xgenomics.com/releases/cell-atac/cellranger-atac-2.1.0.tar.gz?Expires=1739846838&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=e91w5zq4U~sU4G3ibOj1fvO5HW19FrwFMs8WpsresMLUy~IoBbI2FfZbB3QsC1UvrXZjqZ2f4WEkLz36Ww7nfdI37-AkOnpaVZVt3gjwjnoUPfAbLdM3p1S37AgEtGJ00TOS4xzP3l1rxfV-9aGnIlGCVGojtQfT20L3j0mydvUVPmhvs2HXqzdbtgDcUeFU-d8YBt7GvcFrSaM6d4veWXgMKeX1K8fn7s9AlsvBfKeRAKTZu6UPK8w4DTbCpB9--nmTDNyKJjRH9I6AhIXp0NmDDJ81wuhVDQ5f6x0o1q0yX1UWnv8oWbvF5bAtUgLqF68E9v8L-2cANe1pgpjKCA__"
+wget -O cellranger-atac-2.2.0.tar.gz "https://cf.10xgenomics.com/releases/cell-atac/cellranger-atac-2.2.0.tar.gz?Expires=1764019226&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=X2yIbdt3t1AhP-W56O30Gwr8yP0ehfRILoSRQdISFZ1FMSRYbjmh8dNLPhETKbz~rc1igaMtTmU7m2FJUj7IB66eH2ZTshZ8XPHlk5CblKvPWdeTNEsiTYnOYoq0JshCzX-7L7kviTAU77wpJPabohzHOPNlKobKq-aTq1i7jevgxGhENgkXDDsTyZXUDQIfPrXHD0ADDj7zvP3FHNeWb386Pgy30h8J3a143BmhUkjfku0MELCUf-Xv04Rr4hDZzAJxLD1tZN8pwHNkk8jZEP-dpStfU7cocj0MXPo0UZlaj7eBAO6e5vdhnpyK3in4E08CrsWrAphBq6v7L8bJWQ__"
 tar -xzvf cellranger-atac-2.1.0.tar.gz
 export PATH=/opt/cellranger-atac-2.1.0:$PATH
 
 ```
+cellranger can be downloaded from the next link as well: https://www.10xgenomics.com/support/software/cell-ranger/downloads#download-links
+cellranger-atac can be downloaded from the next link as well: https://www.10xgenomics.com/support/software/cell-ranger-atac/downloads#download-links
 
 Instead of downloading cellranger softwares to your environment and only if you use wexac you can run:
 
