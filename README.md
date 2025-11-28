@@ -20,7 +20,7 @@ First clone the git repo to your local computer
 git clone https://github.com/YosefLab/CellRangerIDE
 ```
 
-Due to contradictions between different types of environments we separate between cellbender and cellranger.
+Due to contradictions between different packages dependencies we separate between cellbender and cellranger.
 Therefore, if you only use cellbender please run:
 
 ```bash
